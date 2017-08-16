@@ -1,0 +1,27 @@
+{
+  "name": "eslint-plugin-disable-features",
+  "version": "0.1.0",
+  "description": "eslint plugin that contains rules to disable certain features",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin"
+  ],
+  "author": "Brenden Palmer",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha tests --recursive"
+  },
+  "dependencies": {
+    "requireindex": "~1.1.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "~3.9.1",
+    "mocha": "^3.1.2"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "license": "MIT"
+}
