@@ -19,10 +19,6 @@
   "dependencies": {
     "requireindex": "~1.1.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/brendenpalmer/eslint-plugin-disable-features"
-  },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "eslint": "~3.9.1",
