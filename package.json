@@ -10,7 +10,7 @@
   "author": "Brenden Palmer",
   "repository": {
     "type": "git",
-    "url": "https: //github.com/brendenpalmer/eslint-plugin-disable-features.git"
+    "url": "https://github.com/brendenpalmer/eslint-plugin-disable-features.git"
   },
   "main": "lib/index.js",
   "scripts": {
