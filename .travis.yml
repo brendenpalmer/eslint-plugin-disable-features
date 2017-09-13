@@ -1,0 +1,18 @@
+language: node_js
+cache: yarn
+
+node_js:
+  - "node"
+
+script: yarn run test
+
+matrix:
+  fast_finish: true
+
+deploy:
+  skip_cleanup: true
+  provider: npm
+  email: $DEPLOY_EMAIL
+  api_key: $NPM_TOKEN
+  on:
+    tags: true
