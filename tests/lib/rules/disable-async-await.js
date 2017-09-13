@@ -42,6 +42,18 @@ ruleTester.run('disable-async-await', rule, {
     },
 
     {
+      code: 'async () => {};',
+      parser: 'babel-eslint',
+      errors: [DEFAULT_ERROR_MESSAGE]
+    },
+
+    {
+      code: 'const test = async () => {};',
+      parser: 'babel-eslint',
+      errors: [DEFAULT_ERROR_MESSAGE]
+    },
+
+    {
       code: `
         const test = {
           async test() {}
