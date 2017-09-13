@@ -1,3 +1,5 @@
+![Build status](https://travis-ci.org/brendenpalmer/eslint-plugin-disable-features.svg?branch=master "Build status")
+
 # eslint-plugin-disable-features
 
 Contains rules to disable certain features, e.g., async / await
