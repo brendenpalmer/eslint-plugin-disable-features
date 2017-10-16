@@ -1,9 +1,7 @@
 'use strict';
 
 const rule = require('../../../lib/rules/disable-generator-functions');
-const {
-  RuleTester
-} = require('eslint');
+const RuleTester = require('eslint').RuleTester;
 const DEFAULT_ERROR_MESSAGE = 'Using generator functions are disabled.';
 
 const ruleTester = new RuleTester();

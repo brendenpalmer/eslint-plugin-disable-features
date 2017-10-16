@@ -1,9 +1,7 @@
 'use strict';
 
 const rule = require('../../../lib/rules/disable-async-await');
-const {
-  RuleTester
-} = require('eslint');
+const RuleTester = require('eslint').RuleTester;
 const DEFAULT_ERROR_MESSAGE = 'Using async / await is disabled.';
 
 const ruleTester = new RuleTester();
