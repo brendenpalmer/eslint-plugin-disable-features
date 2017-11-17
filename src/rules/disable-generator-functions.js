@@ -1,15 +1,11 @@
-'use strict';
+const DEFAULT_ERROR_MESSAGE = 'Using generator functions are disabled.';
 
-var DEFAULT_ERROR_MESSAGE = 'Using generator functions are disabled.';
-
-function handleErrorForContext(context) {
-  var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DEFAULT_ERROR_MESSAGE;
-
+function handleErrorForContext(context, message = DEFAULT_ERROR_MESSAGE) {
   return function handleErrorForGeneratorNode(node) {
     if (node.generator) {
       context.report({
         node,
-        message
+        message,
       });
     }
   };
@@ -20,15 +16,15 @@ module.exports = {
     docs: {
       description: 'Disables generator functions',
       category: 'Possible Errors',
-      recommended: false
-    }
+      recommended: false,
+    },
   },
 
   create(context) {
     return {
       FunctionExpression: handleErrorForContext(context),
       AsyncFunctionExpression: handleErrorForContext(context),
-      FunctionDeclaration: handleErrorForContext(context)
+      FunctionDeclaration: handleErrorForContext(context),
     };
-  }
+  },
 };

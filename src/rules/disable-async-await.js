@@ -1,15 +1,11 @@
-'use strict';
+const DEFAULT_ERROR_MESSAGE = 'Using async / await is disabled.';
 
-var DEFAULT_ERROR_MESSAGE = 'Using async / await is disabled.';
-
-function handleErrorForContext(context) {
-  var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : DEFAULT_ERROR_MESSAGE;
-
+function handleErrorForContext(context, message = DEFAULT_ERROR_MESSAGE) {
   return function handleErrorForAsyncNode(node) {
     if (node.async) {
       context.report({
         node,
-        message
+        message,
       });
     }
   };
@@ -20,8 +16,8 @@ module.exports = {
     docs: {
       description: 'Disables async / await',
       category: 'Possible Errors',
-      recommended: false
-    }
+      recommended: false,
+    },
   },
 
   create(context) {
@@ -29,7 +25,7 @@ module.exports = {
       ArrowFunctionExpression: handleErrorForContext(context),
       FunctionExpression: handleErrorForContext(context),
       AsyncFunctionExpression: handleErrorForContext(context),
-      FunctionDeclaration: handleErrorForContext(context)
+      FunctionDeclaration: handleErrorForContext(context),
     };
-  }
+  },
 };

@@ -5,3 +5,6 @@ npm-debug.log
 npm-error.log
 yarn-error.log
 .travis.yml
+.prettierrc
+.babelrc
+src

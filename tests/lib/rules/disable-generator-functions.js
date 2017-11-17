@@ -1,20 +1,20 @@
-'use strict';
+const rule = require('../../../src/rules/disable-generator-functions');
+const { RuleTester } = require('eslint');
 
-const rule = require('../../../lib/rules/disable-generator-functions');
-const RuleTester = require('eslint').RuleTester;
 const DEFAULT_ERROR_MESSAGE = 'Using generator functions are disabled.';
 
 const ruleTester = new RuleTester();
 
 ruleTester.run('disable-generator-functions', rule, {
-  valid: [{
+  valid: [
+    {
       parser: 'babel-eslint',
-      code: 'function test() {}'
+      code: 'function test() {}',
     },
 
     {
       parser: 'babel-eslint',
-      code: 'const test = function() {};'
+      code: 'const test = function() {};',
     },
 
     {
@@ -23,26 +23,27 @@ ruleTester.run('disable-generator-functions', rule, {
         const test = {
           test() {}
         };
-      `
-    }
+      `,
+    },
   ],
 
-  invalid: [{
+  invalid: [
+    {
       code: 'function* test() {}',
       parser: 'babel-eslint',
-      errors: [DEFAULT_ERROR_MESSAGE]
+      errors: [DEFAULT_ERROR_MESSAGE],
     },
 
     {
       code: 'async function* test() {}',
       parser: 'babel-eslint',
-      errors: [DEFAULT_ERROR_MESSAGE]
+      errors: [DEFAULT_ERROR_MESSAGE],
     },
 
     {
       code: 'const test = function*() {};',
       parser: 'babel-eslint',
-      errors: [DEFAULT_ERROR_MESSAGE]
+      errors: [DEFAULT_ERROR_MESSAGE],
     },
 
     {
@@ -52,7 +53,7 @@ ruleTester.run('disable-generator-functions', rule, {
         };
       `,
       parser: 'babel-eslint',
-      errors: [DEFAULT_ERROR_MESSAGE]
+      errors: [DEFAULT_ERROR_MESSAGE],
     },
 
     {
@@ -62,7 +63,7 @@ ruleTester.run('disable-generator-functions', rule, {
         };
       `,
       parser: 'babel-eslint',
-      errors: [DEFAULT_ERROR_MESSAGE]
-    }
-  ]
+      errors: [DEFAULT_ERROR_MESSAGE],
+    },
+  ],
 });
