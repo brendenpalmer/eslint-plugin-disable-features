@@ -4,4 +4,4 @@ node_modules/
 npm-debug.log
 npm-error.log
 yarn-error.log
-lib
+/lib
