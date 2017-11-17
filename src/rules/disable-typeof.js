@@ -3,10 +3,7 @@ function getErrorMessage(type) {
 }
 
 function handleErrorForContext(context, types = []) {
-  const map = {};
-  types.forEach(type => {
-    map[type] = true;
-  });
+  const set = new Set(types);
 
   return function handleErrorForGeneratorNode(node) {
     const { parent = null, operator = null } = node;
@@ -17,7 +14,7 @@ function handleErrorForContext(context, types = []) {
       parent &&
       type === 'BinaryExpression' &&
       right.value &&
-      map.hasOwnProperty(right.value)
+      set.has(right.value)
     ) {
       context.report({
         node,

@@ -16,7 +16,7 @@
   "scripts": {
     "pre-commit": "./scripts/prettier.sh",
     "build": "gulp --prod",
-    "test": "mocha tests --recursive",
+    "test": "gulp test",
     "release": "standard-version"
   },
   "dependencies": {
