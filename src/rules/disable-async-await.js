@@ -11,7 +11,7 @@ function handleErrorForContext(context, message = DEFAULT_ERROR_MESSAGE) {
   };
 }
 
-module.exports = {
+export default {
   meta: {
     docs: {
       description: 'Disables async / await',

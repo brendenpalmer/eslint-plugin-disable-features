@@ -1,5 +1,5 @@
-const rule = require('../../../src/rules/disable-generator-functions');
-const { RuleTester } = require('eslint');
+import { RuleTester } from 'eslint';
+import rule from '../../../src/rules/disable-generator-functions';
 
 const DEFAULT_ERROR_MESSAGE = 'Using generator functions are disabled.';
 

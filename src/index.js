@@ -1,6 +1,5 @@
-/* eslint-disable no-path-concat */
-const requireIndex = require('requireindex');
+import requireIndex from 'requireindex';
 
-module.exports = {
-  rules: requireIndex(`${__dirname}/rules`),
+export default {
+  rules: requireIndex('./rules'),
 };

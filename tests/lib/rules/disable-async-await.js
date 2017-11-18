@@ -1,5 +1,5 @@
-const rule = require('../../../src/rules/disable-async-await');
-const { RuleTester } = require('eslint');
+import { RuleTester } from 'eslint';
+import rule from '../../../src/rules/disable-async-await';
 
 const DEFAULT_ERROR_MESSAGE = 'Using async / await is disabled.';
 
