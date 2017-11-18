@@ -18,6 +18,12 @@ ruleTester.run('disable-typeof', rule, {
 
     {
       parser: 'babel-eslint',
+      code: `if (typeof t == 'string') {}`,
+      options: [{ types: ['number'] }],
+    },
+
+    {
+      parser: 'babel-eslint',
       code: `if (typeof t === 'function') {}`,
       options: [{ types: ['number'] }],
     },
@@ -102,12 +108,28 @@ ruleTester.run('disable-typeof', rule, {
       `,
       options: [{ types: ['string'] }],
     },
+
+    {
+      parser: 'babel-eslint',
+      code: `
+        import test from './t';
+        const check = typeof test === 'number';
+      `,
+      options: [{ types: ['string'] }],
+    },
   ],
 
   invalid: [
     {
       parser: 'babel-eslint',
       code: `const test = typeof t === 'number';`,
+      options: [{ types: ['number'] }],
+      errors: [NUMBER_ERROR_MESSAGE],
+    },
+
+    {
+      parser: 'babel-eslint',
+      code: `const test = typeof t == 'number';`,
       options: [{ types: ['number'] }],
       errors: [NUMBER_ERROR_MESSAGE],
     },
@@ -246,6 +268,31 @@ ruleTester.run('disable-typeof', rule, {
       code: `
         const obj = { a: '' };
         if ('number' === typeof obj['a']) {}
+      `,
+      options: [{ types: ['number'] }],
+      errors: [NUMBER_ERROR_MESSAGE],
+    },
+
+    {
+      parser: 'babel-eslint',
+      code: `
+        function test() {
+          const check = typeof test;
+        
+          return () => {
+            return check === "number";
+          };
+        }      
+      `,
+      options: [{ types: ['number'] }],
+      errors: [NUMBER_ERROR_MESSAGE],
+    },
+
+    {
+      parser: 'babel-eslint',
+      code: `
+        import test from './t';
+        const check = typeof test === 'number';
       `,
       options: [{ types: ['number'] }],
       errors: [NUMBER_ERROR_MESSAGE],

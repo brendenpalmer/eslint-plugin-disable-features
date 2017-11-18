@@ -26,6 +26,32 @@ export function getBinaryExpressionNodes(node) {
   };
 }
 
+export function findResolvedIdentifierByName(identifierName, scope = {}) {
+  const { references = [] } = scope;
+
+  for (let i = 0; i < references.length; i++) {
+    const reference = references[i];
+    const {
+      resolved = null,
+      identifier = {},
+      identifier: { type, name },
+    } = reference;
+
+    if (
+      reference &&
+      resolved &&
+      identifier &&
+      type === 'Identifier' &&
+      name &&
+      name === identifierName
+    ) {
+      return resolved;
+    }
+  }
+
+  return null;
+}
+
 export function reportErrorForNode(context, comparator, literal) {
   context.report({
     node: comparator,

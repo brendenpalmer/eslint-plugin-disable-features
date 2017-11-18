@@ -2,6 +2,7 @@ import {
   getBinaryExpressionNodes,
   isTypeOfNode,
   reportErrorForNode,
+  findResolvedIdentifierByName,
 } from '../utils/disable-typeof-checks-util';
 
 function handleErrorForBinaryExpression(context, types = []) {
@@ -18,8 +19,10 @@ function handleErrorForBinaryExpression(context, types = []) {
     if (isTypeOfNode(comparator)) {
       reportErrorForNode(context, comparator, literal);
     } else if (comparator.type === 'Identifier') {
-      const variable = scope.set.get(comparator.name);
-      const { identifiers = [] } = variable;
+      const { identifiers = [] } = findResolvedIdentifierByName(
+        comparator.name,
+        scope
+      );
 
       if (identifiers.length !== 1) {
         return;

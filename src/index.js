@@ -1,5 +1,6 @@
 import requireIndex from 'requireindex';
+import path from 'path';
 
 export default {
-  rules: requireIndex('./rules'),
+  rules: requireIndex(path.join(__dirname, '/rules')),
 };
