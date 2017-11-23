@@ -6,5 +6,5 @@ gulp.task('lint', () =>
     .src(['src/**/*.js', 'tests/**/*.js'])
     .pipe(eslint())
     .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
+    .pipe(eslint.failAfterError()),
 );

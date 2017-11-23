@@ -6,6 +6,6 @@ gulp.task('test', () =>
     mocha({
       require: 'babel-core/register',
       reporter: 'nyan',
-    })
-  )
+    }),
+  ),
 );
