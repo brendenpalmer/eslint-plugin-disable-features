@@ -52,7 +52,7 @@ export default {
     },
   },
 
-  create: function create(context) {
+  create(context) {
     const { options = [] } = context;
     const types = options && options.length > 0 ? options[0].types : [];
 
