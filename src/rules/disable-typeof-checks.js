@@ -21,7 +21,7 @@ function handleErrorForBinaryExpression(context, types = []) {
     } else if (comparator.type === 'Identifier') {
       const { identifiers = [] } = findResolvedIdentifierByName(
         comparator.name,
-        scope,
+        scope
       );
 
       if (identifiers.length !== 1) {

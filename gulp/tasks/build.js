@@ -5,5 +5,5 @@ gulp.task('build', () =>
   gulp
     .src('src/**/*.js')
     .pipe(babel())
-    .pipe(gulp.dest('lib')),
+    .pipe(gulp.dest('lib'))
 );
