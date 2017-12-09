@@ -1,34 +1,30 @@
-'use strict';
-
 const DEFAULT_ERROR_MESSAGE = 'Using generator functions are disabled.';
 
-function handleErrorForContext(context, _message) {
-  const message = _message || DEFAULT_ERROR_MESSAGE;
-
+function handleErrorForContext(context, message = DEFAULT_ERROR_MESSAGE) {
   return function handleErrorForGeneratorNode(node) {
     if (node.generator) {
       context.report({
         node,
-        message
+        message,
       });
     }
-  }
+  };
 }
 
-module.exports = {
+export default {
   meta: {
     docs: {
       description: 'Disables generator functions',
       category: 'Possible Errors',
-      recommended: false
-    }
+      recommended: false,
+    },
   },
 
-  create: function(context) {
+  create(context) {
     return {
       FunctionExpression: handleErrorForContext(context),
       AsyncFunctionExpression: handleErrorForContext(context),
-      FunctionDeclaration: handleErrorForContext(context)
+      FunctionDeclaration: handleErrorForContext(context),
     };
-  }
+  },
 };
