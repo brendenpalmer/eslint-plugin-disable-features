@@ -1,5 +1,5 @@
 #!/bin/sh
-files=$(git diff --cached --name-only --diff-filter=ACM | grep -v '^\(lib/\)' | grep -v 'package.json' | grep -v 'package-lock.json' | grep -v '^\(docs/\)' | grep '\(\.js\|\.json\|\.ts\)$' | tr '\n' ' ')
+files=$(git diff --cached --name-only --diff-filter=d | grep -v '^\(lib/\)' | grep -v 'package.json' | grep -v 'package-lock.json' | grep -v '^\(docs/\)' | grep '\(\.js\|\.json\|\.ts\)$' | tr '\n' ' ')
 [ -z "$files" ] && exit 0
 
 # Prettify all staged .ts / .js files

@@ -7,4 +7,5 @@ yarn-error.log
 .travis.yml
 .prettierrc
 .babelrc
+.prettierignore
 src
