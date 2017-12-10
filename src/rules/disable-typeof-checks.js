@@ -7,12 +7,13 @@ import {
 
 function handleErrorForBinaryExpression(context, types = []) {
   const set = new Set(types);
+  const disableAll = set.size === 0;
 
   return function handleErrorForNode(node) {
     const scope = context.getScope();
     const { literal, comparator } = getBinaryExpressionNodes(node);
 
-    if (!literal || !comparator || !set.has(literal.value)) {
+    if (!literal || !comparator || (!set.has(literal.value) && !disableAll)) {
       return;
     }
 

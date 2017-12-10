@@ -8,6 +8,23 @@ const FUNCTION_ERROR_MESSAGE =
 
 const ruleTester = new RuleTester();
 
+function testCodeWithAndWithoutTypes(code, types, errors = [], allErrors = []) {
+  return [
+    {
+      parser: 'babel-eslint',
+      code,
+      options: [{ types }],
+      errors,
+    },
+
+    {
+      parser: 'babel-eslint',
+      code,
+      errors: allErrors.length ? allErrors : errors,
+    },
+  ];
+}
+
 ruleTester.run('disable-typeof', rule, {
   valid: [
     {
@@ -120,162 +137,142 @@ ruleTester.run('disable-typeof', rule, {
   ],
 
   invalid: [
-    {
-      parser: 'babel-eslint',
-      code: `const test = typeof t === 'number';`,
-      options: [{ types: ['number'] }],
-      errors: [NUMBER_ERROR_MESSAGE],
-    },
+    ...testCodeWithAndWithoutTypes(
+      `const test = typeof t === 'number';`,
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `const test = typeof t == 'number';`,
-      options: [{ types: ['number'] }],
-      errors: [NUMBER_ERROR_MESSAGE],
-    },
+    ...testCodeWithAndWithoutTypes(
+      `const test = typeof t == 'number';`,
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `if (typeof t === 'number') {}`,
-      options: [{ types: ['number'] }],
-      errors: [NUMBER_ERROR_MESSAGE],
-    },
+    ...testCodeWithAndWithoutTypes(
+      `if (typeof t === 'number') {}`,
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `if (typeof t === 'number' || typeof t === 'string') {}`,
-      options: [{ types: ['string'] }],
-      errors: [STRING_ERROR_MESSAGE],
-    },
+    ...testCodeWithAndWithoutTypes(
+      `if (typeof t === 'number' || typeof t === 'string') {}`,
+      ['string'],
+      [STRING_ERROR_MESSAGE],
+      [NUMBER_ERROR_MESSAGE, STRING_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `if (typeof t === 'number' || typeof t === 'string' || 'string' === typeof t) {}`,
-      options: [{ types: ['number', 'string'] }],
-      errors: [
-        NUMBER_ERROR_MESSAGE,
-        STRING_ERROR_MESSAGE,
-        STRING_ERROR_MESSAGE,
-      ],
-    },
+    ...testCodeWithAndWithoutTypes(
+      `if (typeof t === 'number' || typeof t === 'string' || 'string' === typeof t) {}`,
+      ['number', 'string'],
+      [NUMBER_ERROR_MESSAGE, STRING_ERROR_MESSAGE, STRING_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `if (typeof t === 'string') {}`,
-      options: [{ types: ['number', 'string'] }],
-      errors: [STRING_ERROR_MESSAGE],
-    },
+    ...testCodeWithAndWithoutTypes(
+      `if (typeof t === 'string') {}`,
+      ['number', 'string'],
+      [STRING_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `
+    ...testCodeWithAndWithoutTypes(
+      `
         const t = typeof 5;
         if (t === 'number') {}
       `,
-      options: [{ types: ['number'] }],
-      errors: [NUMBER_ERROR_MESSAGE],
-    },
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `
+    ...testCodeWithAndWithoutTypes(
+      `
         const t = typeof 5;
         if (t === 'number' || typeof '' === 'string') {}
       `,
-      options: [{ types: ['number', 'string'] }],
-      errors: [NUMBER_ERROR_MESSAGE, STRING_ERROR_MESSAGE],
-    },
+      ['number', 'string'],
+      [NUMBER_ERROR_MESSAGE, STRING_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `
+    ...testCodeWithAndWithoutTypes(
+      `
         const t = typeof 5;
         if ('number' === t) {}
       `,
-      options: [{ types: ['number'] }],
-      errors: [NUMBER_ERROR_MESSAGE],
-    },
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `
+    ...testCodeWithAndWithoutTypes(
+      `
         const t = typeof 5;
         const test = typeof '' === 'string';
         if ('number' === t || test) {}
       `,
-      options: [{ types: ['number', 'string'] }],
-      errors: [STRING_ERROR_MESSAGE, NUMBER_ERROR_MESSAGE],
-    },
+      ['number', 'string'],
+      [STRING_ERROR_MESSAGE, NUMBER_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `
+    ...testCodeWithAndWithoutTypes(
+      `
         function test() {
           if (typeof test === 'function') {}
         }
       `,
-      options: [{ types: ['object', 'string', 'number', 'function'] }],
-      errors: [FUNCTION_ERROR_MESSAGE],
-    },
+      ['object', 'string', 'number', 'function'],
+      [FUNCTION_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `
+    ...testCodeWithAndWithoutTypes(
+      `
         function test() {
           if (true) {}
         }
 
         if (typeof test === 'function') {}
       `,
-      options: [{ types: ['object', 'string', 'number', 'function'] }],
-      errors: [FUNCTION_ERROR_MESSAGE],
-    },
+      ['object', 'string', 'number', 'function'],
+      [FUNCTION_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `
+    ...testCodeWithAndWithoutTypes(
+      `
         const obj = { a: '' };
         const t = typeof obj.a;
         if (t === 'number') {}
       `,
-      options: [{ types: ['number'] }],
-      errors: [NUMBER_ERROR_MESSAGE],
-    },
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `
+    ...testCodeWithAndWithoutTypes(
+      `
         const obj = { a: '' };
         const t = typeof obj['a'];
         if (t === 'number') {}
       `,
-      options: [{ types: ['number'] }],
-      errors: [NUMBER_ERROR_MESSAGE],
-    },
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `
+    ...testCodeWithAndWithoutTypes(
+      `
         const obj = { a: '' };
         if (typeof obj['a'] === 'number') {}
       `,
-      options: [{ types: ['number'] }],
-      errors: [NUMBER_ERROR_MESSAGE],
-    },
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `
+    ...testCodeWithAndWithoutTypes(
+      `
         const obj = { a: '' };
         if ('number' === typeof obj['a']) {}
       `,
-      options: [{ types: ['number'] }],
-      errors: [NUMBER_ERROR_MESSAGE],
-    },
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `
+    ...testCodeWithAndWithoutTypes(
+      `
         function test() {
           const check = typeof test;
         
@@ -284,18 +281,17 @@ ruleTester.run('disable-typeof', rule, {
           };
         }      
       `,
-      options: [{ types: ['number'] }],
-      errors: [NUMBER_ERROR_MESSAGE],
-    },
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
 
-    {
-      parser: 'babel-eslint',
-      code: `
+    ...testCodeWithAndWithoutTypes(
+      `
         import test from './t';
         const check = typeof test === 'number';
       `,
-      options: [{ types: ['number'] }],
-      errors: [NUMBER_ERROR_MESSAGE],
-    },
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
   ],
 });
