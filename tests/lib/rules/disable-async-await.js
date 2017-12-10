@@ -1,30 +1,30 @@
-'use strict';
+import { RuleTester } from 'eslint';
+import rule from '../../../src/rules/disable-async-await';
 
-const rule = require('../../../lib/rules/disable-async-await');
-const RuleTester = require('eslint').RuleTester;
 const DEFAULT_ERROR_MESSAGE = 'Using async / await is disabled.';
 
 const ruleTester = new RuleTester();
 
 ruleTester.run('disable-async-await', rule, {
-  valid: [{
+  valid: [
+    {
       parser: 'babel-eslint',
-      code: 'function test() {}'
+      code: 'function test() {}',
     },
 
     {
       parser: 'babel-eslint',
-      code: 'const test = function() {};'
+      code: 'const test = function() {};',
     },
 
     {
       code: '() => {}',
-      parser: 'babel-eslint'
+      parser: 'babel-eslint',
     },
 
     {
       code: 'const test = () => {};',
-      parser: 'babel-eslint'
+      parser: 'babel-eslint',
     },
 
     {
@@ -33,32 +33,33 @@ ruleTester.run('disable-async-await', rule, {
         const test = {
           test() {}
         };
-      `
-    }
+      `,
+    },
   ],
 
-  invalid: [{
+  invalid: [
+    {
       code: 'async function test() {}',
       parser: 'babel-eslint',
-      errors: [DEFAULT_ERROR_MESSAGE]
+      errors: [DEFAULT_ERROR_MESSAGE],
     },
 
     {
       code: 'const test = async function() {};',
       parser: 'babel-eslint',
-      errors: [DEFAULT_ERROR_MESSAGE]
+      errors: [DEFAULT_ERROR_MESSAGE],
     },
 
     {
       code: 'async () => {}',
       parser: 'babel-eslint',
-      errors: [DEFAULT_ERROR_MESSAGE]
+      errors: [DEFAULT_ERROR_MESSAGE],
     },
 
     {
       code: 'const test = async () => {};',
       parser: 'babel-eslint',
-      errors: [DEFAULT_ERROR_MESSAGE]
+      errors: [DEFAULT_ERROR_MESSAGE],
     },
 
     {
@@ -68,7 +69,7 @@ ruleTester.run('disable-async-await', rule, {
         };
       `,
       parser: 'babel-eslint',
-      errors: [DEFAULT_ERROR_MESSAGE]
-    }
-  ]
+      errors: [DEFAULT_ERROR_MESSAGE],
+    },
+  ],
 });

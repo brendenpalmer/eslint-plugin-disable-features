@@ -5,8 +5,13 @@ node_js:
   - 4
   - 6
   - 8
+  - 9
+  - "node"
 
-script: yarn run test
+before_script:
+  - npm install -g gulp-cli
+
+script: yarn run build
 
 matrix:
   fast_finish: true
