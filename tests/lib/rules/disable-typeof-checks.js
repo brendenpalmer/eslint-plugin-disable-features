@@ -35,7 +35,19 @@ ruleTester.run('disable-typeof', rule, {
 
     {
       parser: 'babel-eslint',
+      code: `if (typeof t !== 'string') {}`,
+      options: [{ types: ['number'] }],
+    },
+
+    {
+      parser: 'babel-eslint',
       code: `if (typeof t == 'string') {}`,
+      options: [{ types: ['number'] }],
+    },
+
+    {
+      parser: 'babel-eslint',
+      code: `if (typeof t != 'string') {}`,
       options: [{ types: ['number'] }],
     },
 
@@ -144,7 +156,19 @@ ruleTester.run('disable-typeof', rule, {
     ),
 
     ...testCodeWithAndWithoutTypes(
+      `const test = typeof t !== 'number';`,
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
+
+    ...testCodeWithAndWithoutTypes(
       `const test = typeof t == 'number';`,
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
+
+    ...testCodeWithAndWithoutTypes(
+      `const test = typeof t != 'number';`,
       ['number'],
       [NUMBER_ERROR_MESSAGE]
     ),
@@ -197,6 +221,12 @@ ruleTester.run('disable-typeof', rule, {
         const t = typeof 5;
         if ('number' === t) {}
       `,
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
+
+    ...testCodeWithAndWithoutTypes(
+      `const t = typeof 5 === 'number' ? '' : '';`,
       ['number'],
       [NUMBER_ERROR_MESSAGE]
     ),
