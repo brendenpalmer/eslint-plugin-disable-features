@@ -2,7 +2,6 @@ import {
   getBinaryExpressionNodes,
   isTypeOfNode,
   reportErrorForNode,
-  findResolvedIdentifierByName,
 } from '../utils/disable-typeof-checks-util';
 
 function handleErrorForBinaryExpression(context, types = []) {
@@ -11,7 +10,7 @@ function handleErrorForBinaryExpression(context, types = []) {
 
   return function handleErrorForNode(node) {
     const scope = context.getScope();
-    const { literal, comparator } = getBinaryExpressionNodes(node);
+    const { literal, comparator } = getBinaryExpressionNodes(node, scope);
 
     if (!literal || !comparator || (!set.has(literal.value) && !disableAll)) {
       return;
@@ -19,27 +18,6 @@ function handleErrorForBinaryExpression(context, types = []) {
 
     if (isTypeOfNode(comparator)) {
       reportErrorForNode(context, comparator, literal);
-    } else if (comparator.type === 'Identifier') {
-      const { identifiers = [] } = findResolvedIdentifierByName(
-        comparator.name,
-        scope
-      );
-
-      if (identifiers.length !== 1) {
-        return;
-      }
-
-      const identifier = identifiers[0];
-
-      const { parent = null } = identifier;
-
-      if (
-        parent &&
-        parent.type === 'VariableDeclarator' &&
-        isTypeOfNode(parent.init)
-      ) {
-        reportErrorForNode(context, comparator, literal);
-      }
     }
   };
 }

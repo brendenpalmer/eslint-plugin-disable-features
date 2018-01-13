@@ -1,10 +1,10 @@
 import { RuleTester } from 'eslint';
-import rule from '../../../src/rules/disable-typeof-checks';
+import { getErrorMessage } from '../../src/utils/disable-typeof-checks-util';
+import rule from '../../src/rules/disable-typeof-checks';
 
-const NUMBER_ERROR_MESSAGE = 'Using number typeof expressions are disabled.';
-const STRING_ERROR_MESSAGE = 'Using string typeof expressions are disabled.';
-const FUNCTION_ERROR_MESSAGE =
-  'Using function typeof expressions are disabled.';
+const NUMBER_ERROR_MESSAGE = getErrorMessage('number');
+const STRING_ERROR_MESSAGE = getErrorMessage('string');
+const FUNCTION_ERROR_MESSAGE = getErrorMessage('function');
 
 const ruleTester = new RuleTester();
 
@@ -174,6 +174,15 @@ ruleTester.run('disable-typeof', rule, {
     ),
 
     ...testCodeWithAndWithoutTypes(
+      `
+        const num = 'number';
+        const test = typeof t === num;
+      `,
+      ['number'],
+      [NUMBER_ERROR_MESSAGE]
+    ),
+
+    ...testCodeWithAndWithoutTypes(
       `if (typeof t === 'number') {}`,
       ['number'],
       [NUMBER_ERROR_MESSAGE]
@@ -238,7 +247,7 @@ ruleTester.run('disable-typeof', rule, {
         if ('number' === t || test) {}
       `,
       ['number', 'string'],
-      [STRING_ERROR_MESSAGE, NUMBER_ERROR_MESSAGE]
+      [NUMBER_ERROR_MESSAGE, STRING_ERROR_MESSAGE]
     ),
 
     ...testCodeWithAndWithoutTypes(
@@ -305,11 +314,11 @@ ruleTester.run('disable-typeof', rule, {
       `
         function test() {
           const check = typeof test;
-        
+
           return () => {
             return check === "number";
           };
-        }      
+        }
       `,
       ['number'],
       [NUMBER_ERROR_MESSAGE]
