@@ -989,10 +989,6 @@ caller-path@^0.1.0:
   dependencies:
     callsites "^0.2.0"
 
-callsite@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/callsite/-/callsite-1.0.0.tgz#280398e5d664bd74038b6f0905153e6e8af1bc20"
-
 callsites@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-0.2.0.tgz#afab96262910a7f33c19a5775825c69f34e350ca"
@@ -2048,10 +2044,6 @@ functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
 
-fwd@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/fwd/-/fwd-0.2.2.tgz#0d19f99b40f8af83b8792203ba50dce7e46f7530"
-
 gauge@~2.7.3:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/gauge/-/gauge-2.7.4.tgz#2c03405c7538c39d7eb37b317022e325fb018bf7"
@@ -2286,19 +2278,6 @@ gulp-eslint@^4.0.1:
     eslint "^4.0.0"
     fancy-log "^1.3.2"
     plugin-error "^1.0.0"
-
-gulp-hub@^4.1.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/gulp-hub/-/gulp-hub-4.2.0.tgz#837fb3fe5b5cb9de53bc78ac672309180f3d70d4"
-  dependencies:
-    ansi-colors "^1.0.1"
-    callsite "^1.0.0"
-    fancy-log "^1.3.2"
-    fwd "^0.2.2"
-    glob "^7.1.1"
-    lodash.foreach "^4.0.0"
-    lodash.isstring "^4.0.0"
-    undertaker-forward-reference "^1.0.0"
 
 gulp-mocha@^5.0.0:
   version "5.0.0"
@@ -2939,14 +2918,6 @@ locate-path@^2.0.0:
 lodash._reinterpolate@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
-
-lodash.foreach@^4.0.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.foreach/-/lodash.foreach-4.5.0.tgz#1a6a35eace401280c7f06dddec35165ab27e3e53"
-
-lodash.isstring@^4.0.0:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
 
 lodash.template@^4.0.2:
   version "4.4.0"
@@ -4399,12 +4370,6 @@ uid-number@^0.0.6:
 unc-path-regex@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/unc-path-regex/-/unc-path-regex-0.1.2.tgz#e73dd3d7b0d7c5ed86fbac6b0ae7d8c6a69d50fa"
-
-undertaker-forward-reference@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/undertaker-forward-reference/-/undertaker-forward-reference-1.0.2.tgz#24015dbe96946b533a8fb008baee16793f1057f6"
-  dependencies:
-    undertaker-registry "^1.0.0"
 
 undertaker-registry@^1.0.0:
   version "1.0.1"
