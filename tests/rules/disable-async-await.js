@@ -1,5 +1,5 @@
 import { RuleTester } from 'eslint';
-import rule from '../../../src/rules/disable-async-await';
+import rule from '../../src/rules/disable-async-await';
 
 const DEFAULT_ERROR_MESSAGE = 'Using async / await is disabled.';
 

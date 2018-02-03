@@ -1,4 +1,5 @@
-const gulp = require('gulp');
 const del = require('del');
 
-gulp.task('clean', () => del(['lib']));
+export function clean() {
+  return del(['lib']);
+}
