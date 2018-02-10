@@ -1,3 +1,5 @@
+import { getConfigFromContext } from '../utils/config-util';
+
 const DEFAULT_ERROR_MESSAGE = 'Using async / await is disabled.';
 
 function handleErrorForContext(context, message = DEFAULT_ERROR_MESSAGE) {
@@ -21,11 +23,13 @@ export default {
   },
 
   create(context) {
+    const { message } = getConfigFromContext(context);
+
     return {
-      ArrowFunctionExpression: handleErrorForContext(context),
-      FunctionExpression: handleErrorForContext(context),
-      AsyncFunctionExpression: handleErrorForContext(context),
-      FunctionDeclaration: handleErrorForContext(context),
+      ArrowFunctionExpression: handleErrorForContext(context, message),
+      FunctionExpression: handleErrorForContext(context, message),
+      AsyncFunctionExpression: handleErrorForContext(context, message),
+      FunctionDeclaration: handleErrorForContext(context, message),
     };
   },
 };

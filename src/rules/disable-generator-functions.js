@@ -1,3 +1,5 @@
+import { getConfigFromContext } from '../utils/config-util';
+
 const DEFAULT_ERROR_MESSAGE = 'Using generator functions are disabled.';
 
 function handleErrorForContext(context, message = DEFAULT_ERROR_MESSAGE) {
@@ -21,10 +23,12 @@ export default {
   },
 
   create(context) {
+    const { message } = getConfigFromContext(context);
+
     return {
-      FunctionExpression: handleErrorForContext(context),
-      AsyncFunctionExpression: handleErrorForContext(context),
-      FunctionDeclaration: handleErrorForContext(context),
+      FunctionExpression: handleErrorForContext(context, message),
+      AsyncFunctionExpression: handleErrorForContext(context, message),
+      FunctionDeclaration: handleErrorForContext(context, message),
     };
   },
 };

@@ -83,9 +83,9 @@ export function findResolvedIdentifierByName(identifierName, scope = {}) {
   return null;
 }
 
-export function reportErrorForNode(context, comparator, literal) {
+export function reportErrorForNode(context, comparator, literal, message) {
   context.report({
     node: comparator,
-    message: getErrorMessage(literal.value),
+    message: message || getErrorMessage(literal.value),
   });
 }
