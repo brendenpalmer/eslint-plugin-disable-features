@@ -25,7 +25,7 @@ function testCodeWithAndWithoutTypes(code, types, errors = [], allErrors = []) {
   ];
 }
 
-ruleTester.run('disable-typeof', rule, {
+ruleTester.run('disable-typeof-checks', rule, {
   valid: [
     {
       parser: 'babel-eslint',
@@ -247,7 +247,7 @@ ruleTester.run('disable-typeof', rule, {
         if ('number' === t || test) {}
       `,
       ['number', 'string'],
-      [NUMBER_ERROR_MESSAGE, STRING_ERROR_MESSAGE]
+      [STRING_ERROR_MESSAGE, NUMBER_ERROR_MESSAGE]
     ),
 
     ...testCodeWithAndWithoutTypes(
