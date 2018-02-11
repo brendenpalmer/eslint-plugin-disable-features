@@ -14,8 +14,8 @@ before_script:
   - npm install -g gulp-cli
   - greenkeeper-lockfile-update
 
-after_script: greenkeeper-lockfile-upload
 script: yarn run build
+after_script: greenkeeper-lockfile-upload
 
 matrix:
   fast_finish: true
