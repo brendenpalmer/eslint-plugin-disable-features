@@ -2,6 +2,8 @@
 
 # eslint-plugin-disable-features
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/brendenpalmer/eslint-plugin-disable-features.svg)](https://greenkeeper.io/)
+
 Contains rules to disable certain features, e.g., async / await
 
 ## Rules
