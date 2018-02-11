@@ -17,7 +17,7 @@ function handleErrorForBinaryExpression(context, types = []) {
     }
 
     if (isTypeOfNode(comparator)) {
-      reportErrorForNode(context, comparator, literal);
+      reportErrorForNode(context, node, literal);
     }
   };
 }
