@@ -65,5 +65,16 @@ ruleTester.run('disable-generator-functions', rule, {
       parser: 'babel-eslint',
       errors: [DEFAULT_ERROR_MESSAGE],
     },
+
+    {
+      code: `
+        const test = {
+          async *test() {}
+        };
+      `,
+      parser: 'babel-eslint',
+      errors: ['Test error message'],
+      options: [{ message: 'Test error message' }],
+    },
   ],
 });

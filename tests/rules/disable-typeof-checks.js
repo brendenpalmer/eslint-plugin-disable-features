@@ -8,18 +8,25 @@ const FUNCTION_ERROR_MESSAGE = getErrorMessage('function');
 
 const ruleTester = new RuleTester();
 
-function testCodeWithAndWithoutTypes(code, types, errors = [], allErrors = []) {
+function testCodeWithAndWithoutTypes(
+  code,
+  types,
+  errors = [],
+  allErrors = [],
+  options = [{ types }]
+) {
   return [
     {
       parser: 'babel-eslint',
       code,
-      options: [{ types }],
+      options,
       errors,
     },
 
     {
       parser: 'babel-eslint',
       code,
+      options: [{ message: options[0].message }],
       errors: allErrors.length ? allErrors : errors,
     },
   ];
@@ -331,6 +338,17 @@ ruleTester.run('disable-typeof-checks', rule, {
       `,
       ['number'],
       [NUMBER_ERROR_MESSAGE]
+    ),
+
+    ...testCodeWithAndWithoutTypes(
+      `
+        import test from './t';
+        const check = typeof test === 'number';
+      `,
+      ['number'],
+      ['Test error message'],
+      [],
+      [{ types: ['number'], message: 'Test error message' }]
     ),
   ],
 });
