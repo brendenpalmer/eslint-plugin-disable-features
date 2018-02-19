@@ -1,24 +1,22 @@
 import { getConfigFromContext } from '../utils/config-util';
 import {
-  isTypeOfNode,
+  isInstanceOfNode,
   reportErrorForNode,
-  getBinaryExpressionNodes,
-} from '../utils/disable-typeof-checks-util';
+} from '../utils/disable-instanceof-checks-util';
 
 function handleErrorForBinaryExpression(context, types = [], message) {
   const set = new Set(types);
   const disableAll = set.size === 0;
 
   return function handleErrorForNode(node) {
-    const scope = context.getScope();
-    const { literal, comparator } = getBinaryExpressionNodes(node, scope);
+    const { left, right } = node;
 
-    if (!literal || !comparator || (!set.has(literal.value) && !disableAll)) {
+    if (!left || !right || (!set.has(right.name) && !disableAll)) {
       return;
     }
 
-    if (isTypeOfNode(comparator)) {
-      reportErrorForNode(context, node, literal, message);
+    if (isInstanceOfNode(node)) {
+      reportErrorForNode(context, node, right, message);
     }
   };
 }
@@ -26,7 +24,7 @@ function handleErrorForBinaryExpression(context, types = [], message) {
 export default {
   meta: {
     docs: {
-      description: 'Disables certain typeof expressions',
+      description: 'Disables certain instanceof expressions',
       category: 'Possible Errors',
       recommended: false,
     },
