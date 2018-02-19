@@ -1,10 +1,12 @@
+import { getConfigFromContext } from '../utils/config-util';
+
 import {
   getBinaryExpressionNodes,
   isTypeOfNode,
   reportErrorForNode,
 } from '../utils/disable-typeof-checks-util';
 
-function handleErrorForBinaryExpression(context, types = []) {
+function handleErrorForBinaryExpression(context, types = [], message) {
   const set = new Set(types);
   const disableAll = set.size === 0;
 
@@ -17,7 +19,7 @@ function handleErrorForBinaryExpression(context, types = []) {
     }
 
     if (isTypeOfNode(comparator)) {
-      reportErrorForNode(context, comparator, literal);
+      reportErrorForNode(context, node, literal, message);
     }
   };
 }
@@ -32,11 +34,10 @@ export default {
   },
 
   create(context) {
-    const { options = [] } = context;
-    const types = options && options.length > 0 ? options[0].types : [];
+    const { types = [], message } = getConfigFromContext(context);
 
     return {
-      BinaryExpression: handleErrorForBinaryExpression(context, types),
+      BinaryExpression: handleErrorForBinaryExpression(context, types, message),
     };
   },
 };
