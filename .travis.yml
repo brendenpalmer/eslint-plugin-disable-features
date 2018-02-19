@@ -2,16 +2,20 @@ language: node_js
 cache: yarn
 
 node_js:
-  - 4
-  - 6
-  - 8
-  - 9
   - "node"
+  - 9
+  - 8
+  - 6
+  - 4
+
+before_install: yarn global add greenkeeper-lockfile@1
 
 before_script:
   - npm install -g gulp-cli
+  - greenkeeper-lockfile-update
 
 script: yarn run build
+after_script: greenkeeper-lockfile-upload
 
 matrix:
   fast_finish: true
