@@ -1,8 +1,9 @@
 import { getConfigFromContext } from '../utils/config-util';
+
 import {
+  getBinaryExpressionNodes,
   isTypeOfNode,
   reportErrorForNode,
-  getBinaryExpressionNodes,
 } from '../utils/disable-typeof-checks-util';
 
 function handleErrorForBinaryExpression(context, types = [], message) {
