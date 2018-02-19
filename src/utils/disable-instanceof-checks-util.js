@@ -1,5 +1,5 @@
 export function getErrorMessage(type) {
-  return `Using ${type} instanceof expressions are disabled.`;
+  return `Using ${type} instanceof checks are disabled.`;
 }
 
 export function isInstanceOfNode(node) {
