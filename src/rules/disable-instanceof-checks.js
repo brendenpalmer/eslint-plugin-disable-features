@@ -1,4 +1,5 @@
 import { getConfigFromContext } from '../utils/config-util';
+
 import {
   isInstanceOfNode,
   reportErrorForNode,
@@ -24,7 +25,7 @@ function handleErrorForBinaryExpression(context, types = [], message) {
 export default {
   meta: {
     docs: {
-      description: 'Disables certain instanceof expressions',
+      description: 'Disables certain instanceof checks',
       category: 'Possible Errors',
       recommended: false,
     },

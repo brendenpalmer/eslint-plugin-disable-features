@@ -27,7 +27,7 @@ function handleErrorForBinaryExpression(context, types = [], message) {
 export default {
   meta: {
     docs: {
-      description: 'Disables certain typeof checks',
+      description: 'Disables certain typeof expressions',
       category: 'Possible Errors',
       recommended: false,
     },
