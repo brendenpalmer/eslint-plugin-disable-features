@@ -38,7 +38,7 @@
     "pre-commit": "^1.2.2",
     "prettier": "^1.10.2",
     "standard-version": "^4.3.0",
-    "yargs": "^11.0.0"
+    "yargs": "^12.0.1"
   },
   "engines": {
     "node": ">=4.0.0"
