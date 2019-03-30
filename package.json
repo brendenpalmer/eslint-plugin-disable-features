@@ -28,7 +28,7 @@
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-env": "^1.6.1",
     "del": "^3.0.0",
-    "eslint": "^4.15.0",
+    "eslint": "^5.16.0",
     "eslint-config-prettier": "^2.9.0",
     "gulp": "^4.0.0",
     "gulp-babel": "^7.0.0",
