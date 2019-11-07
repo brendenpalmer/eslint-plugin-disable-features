@@ -39,7 +39,7 @@
     "mocha": "^6.0.2",
     "pre-commit": "^1.2.2",
     "prettier": "^1.10.2",
-    "standard-version": "^5.0.2",
+    "standard-version": "^7.0.1",
     "yargs": "^13.2.2"
   },
   "engines": {
